@@ -24,7 +24,7 @@ jobs:
       - name: Run SourceGuard scan on code
         run: |
           docker pull checkpoint/shiftleft
-          docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=d47c1590-4234-4fe5-8841-1c643198bfbc" -e "CHKP_CLOUDGUARD_SECRET=fycm81nttdfuhhigt9fcttfs" checkpoint/shiftleft shiftleft code-scan -r -2003 -e 3dab4fec-ca34-42aa-96b1-e02da3f8c292 -s /tmp/
+          docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=" -e "CHKP_CLOUDGUARD_SECRET=" checkpoint/shiftleft shiftleft code-scan -r -2003 -e  -s /tmp/
 #  Image_Scanner:
  #   needs: Code_Scanner
   #  runs-on: ubuntu-latest
