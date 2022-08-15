@@ -1,4 +1,4 @@
-name: ShiftLeft-Scans
+name: ShiftLeft-Scans1
 on:
   push:
     branches: [ master ]
