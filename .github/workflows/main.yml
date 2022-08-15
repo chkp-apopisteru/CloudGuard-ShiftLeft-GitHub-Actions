@@ -24,29 +24,29 @@ jobs:
       - name: Run SourceGuard scan on code
         run: |
           docker pull checkpoint/shiftleft
-          docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft code-scan -r -2003 -e 3dab4fec-ca34-42aa-96b1-e02da3f8c292 -s /tmp/
-  Image_Scanner:
-    needs: Code_Scanner
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build the webapp container and save image
-        run: |
-          docker build . --tag chkp/webapp:latest
-          docker save chkp/webapp:latest -o webapp.tar
-      - name: Run Shiftleft assessment on saved image
-        run: |  
-          docker pull checkpoint/shiftleft
-          docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft image-scan -i /tmp/webapp.tar
+          docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=d47c1590-4234-4fe5-8841-1c643198bfbc" -e "CHKP_CLOUDGUARD_SECRET=fycm81nttdfuhhigt9fcttfs" checkpoint/shiftleft shiftleft code-scan -r -2003 -e 3dab4fec-ca34-42aa-96b1-e02da3f8c292 -s /tmp/
+#  Image_Scanner:
+ #   needs: Code_Scanner
+  #  runs-on: ubuntu-latest
+   # steps:
+    #  - uses: actions/checkout@v2
+     # - name: Build the webapp container and save image
+      #  run: |
+       #   docker build . --tag chkp/webapp:latest
+        #  docker save chkp/webapp:latest -o webapp.tar
+     # - name: Run Shiftleft assessment on saved image
+      #  run: |  
+       #   docker pull checkpoint/shiftleft
+        #  docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft image-scan -i /tmp/webapp.tar
 # TODO: add here logic to save artifact or to pass to next job     
-  IAC_Assessment:
-    needs: [Code_Scanner, Image_Scanner]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Pull Check Point Shiftleft image
-        run: docker pull checkpoint/shiftleft
-      - name: Run IAC assessment on Terraform folder
-        run: |
-          docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft iac-assessment -p /tmp/terraform/ -r -64
+#  IAC_Assessment:
+ #   needs: [Code_Scanner, Image_Scanner]
+  #  runs-on: ubuntu-latest
+   # steps:
+    #  - uses: actions/checkout@v2
+     # - name: Pull Check Point Shiftleft image
+      #  run: docker pull checkpoint/shiftleft
+      #- name: Run IAC assessment on Terraform folder
+       # run: |
+        #  docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft iac-assessment -p /tmp/terraform/ -r -64
 # TODO: add logic to deploy somewhere the webapp container - ECS ?
