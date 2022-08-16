@@ -1,5 +1,7 @@
 const http = require('http');
 
+const test = 1;
+
 const hostname = '127.0.0.1';
 const port = 8000;
 
