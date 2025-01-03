@@ -36,4 +36,5 @@ jobs:
       - name: deploy
         id: deployment # used in environment url
         uses: actions/deploy-pages@v1
-        - run: echo ${{ steps.deployment.outputs.page_url }}
+# add an unnamed step to display the URL        
+      - run: echo ${{ steps.deployment.outputs.page_url }}
