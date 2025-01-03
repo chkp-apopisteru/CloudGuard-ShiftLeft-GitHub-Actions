@@ -37,4 +37,4 @@ jobs:
         id: deployment # used in environment url
         uses: actions/deploy-pages@v1
 # add an unnamed step to display the URL        
-      - run: echo ${{ steps.deployment.outputs.page_url }}
+      - run: echo ${{ steps.deployment.outputs.page_url }} >> $GITHUB_STEP_SUMMARY
