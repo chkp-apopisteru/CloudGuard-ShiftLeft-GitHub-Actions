@@ -29,10 +29,11 @@ jobs:
       - run: npm run build
 
       - name: upload artifacts
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v4
         with: 
           path: "./out"
 
       - name: deploy
         id: deployment # used in environment url
         uses: actions/deploy-pages@v1
+        - run: echo ${{ steps.deployment.outputs.page_url }}
